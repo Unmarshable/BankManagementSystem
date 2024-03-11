@@ -1,0 +1,98 @@
+package bankmanagementsystem;
+
+class BankAccount {
+    private String accountNumber;
+    private String accountHolderName;
+    private double balance;
+
+    // Constructor
+    public BankAccount(String accountNumber, String accountHolderName) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = 0.0;
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println(amount + " deposited successfully.");
+        } else {
+            System.out.println("Invalid amount. Please enter a positive value.");
+        }
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println(amount + " withdrawn successfully.");
+        } else {
+            System.out.println("Insufficient balance or invalid amount.");
+        }
+    }
+
+    // Method to check balance
+    public void checkBalance() {
+        System.out.println("Account Balance: $" + balance);
+    }
+
+    // Method to display account details
+    public void displayAccountDetails() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder Name: " + accountHolderName);
+        System.out.println("Account Balance: $" + balance);
+    }
+}
+
+public class BankManagementSystem {
+    public static void main(String[] args) {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+
+        // Creating a new bank account
+        System.out.println("Enter account number:");
+        String accountNumber = scanner.nextLine();
+        System.out.println("Enter account holder name:");
+        String accountHolderName = scanner.nextLine();
+        BankAccount account = new BankAccount(accountNumber, accountHolderName);
+
+        // Menu
+        int choice;
+        do {
+            System.out.println("\nMenu:");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Display Account Details");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter amount to deposit: $");
+                    double depositAmount = scanner.nextDouble();
+                    account.deposit(depositAmount);
+                    break;
+                case 2:
+                    System.out.print("Enter amount to withdraw: $");
+                    double withdrawAmount = scanner.nextDouble();
+                    account.withdraw(withdrawAmount);
+                    break;
+                case 3:
+                    account.checkBalance();
+                    break;
+                case 4:
+                    account.displayAccountDetails();
+                    break;
+                case 5:
+                    System.out.println("Exiting program. Thank you!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+            }
+        } while (choice != 5);
+12
+        scanner.close();
+    }
+}
